@@ -1,0 +1,64 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: main
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/grycap/tosca:
+      branch: main
+      repo: https://github.com/grycap/tosca
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/grycap/tosca git:
+        commands:
+        - /usr/bin/env sh .sqa/script.flabby-viridian-gorilla.sh
+        container: qc.acc_pasty-russet-opossum
+  QC.Doc:
+    repos:
+      github.com/grycap/tosca find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.chummy-thistle-panda.sh
+        container: qc.doc_lousy-cobalt-kingfisher
+      github.com/grycap/tosca git:
+        commands:
+        - /usr/bin/env sh .sqa/script.flaky-xanthic-wombat.sh
+        container: qc.doc_nippy-maroon-sheepdog
+      github.com/grycap/tosca markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.wimpy-thistle-butterfly.sh
+        container: qc.doc_skinny-white-sheepdog
+  QC.Lic:
+    repos:
+      github.com/grycap/tosca licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.woozy-lemon-frog.sh
+        container: qc.lic_bumpy-alizarin-burmese
+  QC.Sec:
+    repos:
+      github.com/grycap/tosca bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.cheeky-ultramarine-spaniel.sh
+        container: qc.sec_ready-cobalt-slug
+  QC.Sty:
+    repos:
+      github.com/grycap/tosca flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.lovely-aquamarine-crane.sh
+        container: qc.sty_whiny-scarlet-cat
+  QC.Uni:
+    repos:
+      github.com/grycap/tosca pytest:
+        commands:
+        - /usr/bin/env sh .sqa/script.crappy-ivory-moth.sh
+        container: qc.uni_lumpy-cinnamon-toucan
+  QC.Ver:
+    repos:
+      github.com/grycap/tosca get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.shaky-pumpkin-scorpion.sh
+        container: qc.ver_pretty-flax-toad
+timeout: 5400
